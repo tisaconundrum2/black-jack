@@ -8,14 +8,14 @@ from gamefunctions import *
 class main(QtGui.QMainWindow):
        
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-        self.ui = blackjackui.Ui_Blackjack()
-        self.ui.setupUi(self)
+        QtGui.QMainWindow.__init__(self)                         # Starting the mainWindow
+        self.ui = blackjackui.Ui_Blackjack()                     # getting the UI framework the Blackjack UI and putting it into ui
+        self.ui.setupUi(self)                                    # calling the function from Ui_Blackjack
         
-        self.ui.btnBet.clicked.connect(self.betClicked)
-        self.ui.btnStay.clicked.connect(self.stayClicked)
-        self.ui.btnDouble.clicked.connect(self.doubleClicked)
-        self.ui.btnHit.clicked.connect(self.hitClicked)
+        self.ui.btnBet.clicked.connect(self.betClicked)          # connecting the bet Button from the Ui_Blackjack class
+        self.ui.btnStay.clicked.connect(self.stayClicked)        # connecting stay button
+        self.ui.btnDouble.clicked.connect(self.doubleClicked)    # connecting double button
+        self.ui.btnHit.clicked.connect(self.hitClicked)          # connecting hit button
         
         self.deck = deck()
         self.shoe = create_shoe(self.deck, 1)  #creates a deck of cards to be used during the game
