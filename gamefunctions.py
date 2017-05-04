@@ -31,14 +31,14 @@ def split(hand, shoe):
             return card
     return 0
     
-def double(hand, shoe):
-    '''checks if player would like to double their bet and provides a hit'''
-    action = input("Would you like to double? \n")
-    if action == 'y':
-        hit(hand, shoe)
-        return 2
-    else:
-        return 0
+# def double(hand, shoe):
+#     '''checks if player would like to double their bet and provides a hit'''
+#     action = input("Would you like to double? \n")
+#     if action == 'y':
+#         hit(hand, shoe)
+#         return 2
+#     else:
+#         return 0
 
 def hit(hand, shoe):
     '''adds a card to the hand, performs a hit'''
