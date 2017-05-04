@@ -1,15 +1,15 @@
 import sys
-import blackjackui
-import gamestart
+
 from UIfunctions import *
 from gamefunctions import *
+from ui import newBlackJacUI
 
 
 class main(QtGui.QMainWindow):
 
     def __init__(self):
         QtGui.QMainWindow.__init__(self)                         # Starting the mainWindow
-        self.ui = blackjackui.Ui_Blackjack()                     # getting the UI framework the Blackjack UI and putting it into ui
+        self.ui = newBlackJacUI.Ui_Blackjack()                     # getting the UI framework the Blackjack UI and putting it into ui
         self.ui.setupUi(self)                                    # calling the function from Ui_Blackjack
 
         self.ui.btnBet.clicked.connect(self.betClicked)          # connecting the bet Button from the Ui_Blackjack class
@@ -27,24 +27,22 @@ class main(QtGui.QMainWindow):
         self.bet = 0
 
         # list of card graphics in the ui
-        self.dealer_hand = [self.ui.dCard, self.ui.dCard_2, self.ui.dCard_3, self.ui.dCard_4, self.ui.dCard_5,
-                            self.ui.dCard_6, self.ui.dCard_7, self.ui.dCard_8, self.ui.dCard_9, self.ui.dCard_10]
-        self.player_hand = [self.ui.pCard, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4, self.ui.pCard_5,
-                            self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9, self.ui.pCard_10]
+        self.dealer_hand = [self.ui.dCard_0, self.ui.dCard_1, self.ui.dCard_2, self.ui.dCard_3, self.ui.dCard_4]
+        self.player_hand = [self.ui.pCard_0, self.ui.dCard_1, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4]
 
         # disables all buttons that control the hand
         buttoncontrol(self.ui)
 
     def betClicked(self):
         try:
-            if (int(self.ui.lineBet.text()) > self.money or int(self.ui.lineBet.text()) < 0):
+            if (int(self.ui.betDoubleSpinBox.text()) > self.money or int(self.ui.betDoubleSpinBox.text()) < 0):
                 self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
             else:
                 betfunction(self)
         except:
             self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
 
-        self.ui.lineBet.clear()
+        self.ui.betDoubleSpinBox.clear()
 
     def hitClicked(self):
         '''adds card to the ui showing the card that was just added to the hand'''
