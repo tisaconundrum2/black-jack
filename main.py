@@ -35,7 +35,11 @@ class main(QtGui.QMainWindow):
 
     def betClicked(self):
         try:
-            if (int(self.ui.betDoubleSpinBox.text()) > self.money or int(self.ui.betDoubleSpinBox.text()) < 0):
+            if self.money <= 0:
+                self.money = 500
+                self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
+                self.ui.labMoney.setText(str(self.money))
+            elif int(self.ui.betDoubleSpinBox.text()) > self.money or int(self.ui.betDoubleSpinBox.text()) < 0:
                 self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
             else:
                 betfunction(self)
