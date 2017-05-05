@@ -142,14 +142,12 @@ class Ui_Blackjack(object):
         self.betLabel.setFont(font)
         self.betLabel.setObjectName(_fromUtf8("betLabel"))
         self.bettingSide.addWidget(self.betLabel)
-        self.betDoubleSpinBox = QtGui.QDoubleSpinBox(Blackjack)
+        self.betSpinBox = QtGui.QSpinBox(Blackjack)
         font = QtGui.QFont()
         font.setPointSize(13)
-        self.betDoubleSpinBox.setFont(font)
-        self.betDoubleSpinBox.setMaximum(9999999.0)
-        self.betDoubleSpinBox.setProperty("value", 1.0)
-        self.betDoubleSpinBox.setObjectName(_fromUtf8("betDoubleSpinBox"))
-        self.bettingSide.addWidget(self.betDoubleSpinBox)
+        self.betSpinBox.setFont(font)
+        self.betSpinBox.setObjectName(_fromUtf8("betSpinBox"))
+        self.bettingSide.addWidget(self.betSpinBox)
         self.labWarning = QtGui.QLabel(Blackjack)
         self.labWarning.setText(_fromUtf8(""))
         self.labWarning.setObjectName(_fromUtf8("labWarning"))
@@ -186,4 +184,14 @@ class Ui_Blackjack(object):
         self.btnDouble.setText(_translate("Blackjack", "Double", None))
         self.btnHit.setText(_translate("Blackjack", "Hit", None))
         self.btnStay.setText(_translate("Blackjack", "Stay", None))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Blackjack = QtGui.QWidget()
+    ui = Ui_Blackjack()
+    ui.setupUi(Blackjack)
+    Blackjack.show()
+    sys.exit(app.exec_())
 

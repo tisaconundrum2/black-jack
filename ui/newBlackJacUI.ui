@@ -247,17 +247,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="betDoubleSpinBox">
+      <widget class="QSpinBox" name="betSpinBox">
        <property name="font">
         <font>
          <pointsize>13</pointsize>
         </font>
-       </property>
-       <property name="maximum">
-        <double>9999999.000000000000000</double>
-       </property>
-       <property name="value">
-        <double>1.000000000000000</double>
        </property>
       </widget>
      </item>
