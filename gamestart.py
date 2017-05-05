@@ -48,9 +48,8 @@ def deal_card(shoe):
     '''deals a card from the deck'''
     from random import choice
     dealt_card = choice(list(shoe.keys()))  #randomly draws a card from the base deck
-
-    if shoe[dealt_card] <= 0:    #checks to see if the card is in the shoe
-        return deal_card(shoe)         #if not calls the funciton to find a card that is
+    while shoe[dealt_card] == 0 and sum(shoe.values()) > 0: # check to see if the card is a zero and that we haven't run out of cards to play with.
+        dealt_card = choice(list(shoe.keys()))  # randomly draws a card from the base deck
     else:
         shoe[dealt_card] -=1    #reduces the number of that card in the shoe and
         return dealt_card       #returns the card
