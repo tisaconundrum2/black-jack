@@ -6,22 +6,22 @@ from gamefunctions import *
 
 
 class main(QtGui.QWidget):
-
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)                         # Starting the mainWindow
-        self.ui = newBlackJacUI.Ui_Blackjack()                     # getting the UI framework the Blackjack UI and putting it into ui
-        self.ui.setupUi(self)                                    # calling the function from Ui_Blackjack
+        QtGui.QMainWindow.__init__(self)  # Starting the mainWindow
+        self.ui = newBlackJacUI.Ui_Blackjack()  # getting the UI framework the Blackjack UI and putting it into ui
+        self.ui.setupUi(self)  # calling the function from Ui_Blackjack
 
-        self.ui.btnBet.clicked.connect(self.betClicked)          # connecting the bet Button from the Ui_Blackjack class
-        self.ui.btnStay.clicked.connect(self.stayClicked)        # connecting stay button
-        self.ui.btnDouble.clicked.connect(self.doubleClicked)    # connecting double button
-        self.ui.btnHit.clicked.connect(self.hitClicked)          # connecting hit button
+        self.ui.btnBet.clicked.connect(self.betClicked)  # connecting the bet Button from the Ui_Blackjack class
+        self.ui.btnStay.clicked.connect(self.stayClicked)  # connecting stay button
+        self.ui.btnDouble.clicked.connect(self.doubleClicked)  # connecting double button
+        self.ui.btnHit.clicked.connect(self.hitClicked)  # connecting hit button
 
         self.deck = deck()
-        self.shoe = create_shoe(self.deck, 1)                    # creates a deck of cards to be used during the game
+        self.shoe = create_shoe(self.deck, 1)  # creates a deck of cards to be used during the game
 
         # sets up the initial game conditions
         self.money = 500
+        self.ui.betSpinBox.setMaximum(int(self.ui.labMoney.text()))
         self.ui.labMoney.setText(str(self.money))
         self.hands = []
         self.bet = 0
@@ -34,18 +34,17 @@ class main(QtGui.QWidget):
         buttoncontrol(self.ui)
 
     def betClicked(self):
-        doubleSpinbox = int(self.ui.betSpinBox.text())
-        # try:
-        if self.money <= 0:
-            self.money = 500
-            self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
-            self.ui.labMoney.setText(str(self.money))
-        elif doubleSpinbox > self.money or doubleSpinbox < 0:
+        try:
+            if self.money <= 0:
+                self.money = 500
+                self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
+                self.ui.labMoney.setText(str(self.money))
+            elif int(self.ui.betSpinBox.text()) > self.money or int(self.ui.betSpinBox.text()) < 0:
+                self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
+            else:
+                betfunction(self)
+        except:
             self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
-        else:
-            betfunction(self)
-        # except Ex:
-        #     self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
 
         self.ui.betSpinBox.clear()
 
@@ -87,10 +86,11 @@ class main(QtGui.QWidget):
 
         self.money += winnings(self.bet, winner)  # updates self.money based on bet
         self.ui.labMoney.setText(str(self.money))
+        self.ui.betSpinBox.setMaximum(int(self.ui.labMoney.text()))  # update the maximum withdrawal
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)      # Specify that we are working with a QApplication
-    Window = main()                         # set the class main() int Window
-    Window.show()                           # have this main() be displayed
-    app.exec_()                             # execute the app
+    app = QtGui.QApplication(sys.argv)  # Specify that we are working with a QApplication
+    Window = main()  # set the class main() int Window
+    Window.show()  # have this main() be displayed
+    app.exec_()  # execute the app
