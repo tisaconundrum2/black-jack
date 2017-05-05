@@ -27,8 +27,10 @@ class main(QtGui.QWidget):
         self.bet = 0
 
         # list of card graphics in the ui
-        self.dealer_hand = [self.ui.dCard_0, self.ui.dCard_1, self.ui.dCard_2, self.ui.dCard_3, self.ui.dCard_4]
-        self.player_hand = [self.ui.pCard_0, self.ui.dCard_1, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4]
+        self.dealer_hand = [self.ui.dCard_0, self.ui.dCard_1, self.ui.dCard_2, self.ui.dCard_3, self.ui.dCard_4,
+                            self.ui.dCard_5, self.ui.dCard_6, self.ui.dCard_7, self.ui.dCard_8, self.ui.dCard_9]
+        self.player_hand = [self.ui.pCard_0, self.ui.dCard_1, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4,
+                            self.ui.pCard_5, self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9]
 
         # disables all buttons that control the hand
         buttoncontrol(self.ui)
@@ -39,6 +41,7 @@ class main(QtGui.QWidget):
                 self.money = 500
                 self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
                 self.ui.labMoney.setText(str(self.money))
+                self.ui.betSpinBox.setMaximum(self.money)
             elif int(self.ui.betSpinBox.text()) > self.money or int(self.ui.betSpinBox.text()) < 0:
                 self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
             else:
@@ -86,7 +89,7 @@ class main(QtGui.QWidget):
 
         self.money += winnings(self.bet, winner)  # updates self.money based on bet
         self.ui.labMoney.setText(str(self.money))
-        self.ui.betSpinBox.setMaximum(int(self.ui.labMoney.text()))  # update the maximum withdrawal
+        self.ui.betSpinBox.setMaximum(self.money)  # update the maximum withdrawal
 
 
 if __name__ == '__main__':
