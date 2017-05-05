@@ -253,6 +253,12 @@
          <pointsize>13</pointsize>
         </font>
        </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>99999999</number>
+       </property>
       </widget>
      </item>
      <item>

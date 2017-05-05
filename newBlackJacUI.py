@@ -146,6 +146,8 @@ class Ui_Blackjack(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.betSpinBox.setFont(font)
+        self.betSpinBox.setMinimum(1)
+        self.betSpinBox.setMaximum(99999999)
         self.betSpinBox.setObjectName(_fromUtf8("betSpinBox"))
         self.bettingSide.addWidget(self.betSpinBox)
         self.labWarning = QtGui.QLabel(Blackjack)
