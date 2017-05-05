@@ -1,11 +1,11 @@
 import sys
 
+import newBlackJacUI
 from UIfunctions import *
 from gamefunctions import *
-from ui import newBlackJacUI
 
 
-class main(QtGui.QMainWindow):
+class main(QtGui.QWidget):
 
     def __init__(self):
         QtGui.QMainWindow.__init__(self)                         # Starting the mainWindow
@@ -34,19 +34,20 @@ class main(QtGui.QMainWindow):
         buttoncontrol(self.ui)
 
     def betClicked(self):
-        try:
-            if self.money <= 0:
-                self.money = 500
-                self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
-                self.ui.labMoney.setText(str(self.money))
-            elif int(self.ui.betDoubleSpinBox.text()) > self.money or int(self.ui.betDoubleSpinBox.text()) < 0:
-                self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
-            else:
-                betfunction(self)
-        except:
+        doubleSpinbox = int(self.ui.betSpinBox.text())
+        # try:
+        if self.money <= 0:
+            self.money = 500
+            self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
+            self.ui.labMoney.setText(str(self.money))
+        elif doubleSpinbox > self.money or doubleSpinbox < 0:
             self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
+        else:
+            betfunction(self)
+        # except Ex:
+        #     self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
 
-        self.ui.betDoubleSpinBox.clear()
+        self.ui.betSpinBox.clear()
 
     def hitClicked(self):
         '''adds card to the ui showing the card that was just added to the hand'''
@@ -89,7 +90,7 @@ class main(QtGui.QMainWindow):
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    Window = main()
-    Window.show()
-    app.exec_()
+    app = QtGui.QApplication(sys.argv)      # Specify that we are working with a QApplication
+    Window = main()                         # set the class main() int Window
+    Window.show()                           # have this main() be displayed
+    app.exec_()                             # execute the app
