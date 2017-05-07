@@ -224,7 +224,7 @@ class Ui_Blackjack(object):
         QtCore.QMetaObject.connectSlotsByName(Blackjack)
 
     def retranslateUi(self, Blackjack):
-        Blackjack.setWindowTitle(_translate("Blackjack", "Form", None))
+        Blackjack.setWindowTitle(_translate("Blackjack", "Blackjack", None))
         self.dealerLabel.setText(_translate("Blackjack", "Dealer:", None))
         self.labDealer.setText(_translate("Blackjack", "0", None))
         self.playerLabel.setText(_translate("Blackjack", "Player:", None))
