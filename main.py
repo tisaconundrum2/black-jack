@@ -1,6 +1,6 @@
 import sys
 
-import newBlackJacUI
+import blackjackui
 from UIfunctions import *
 from gamefunctions import *
 
@@ -8,7 +8,7 @@ from gamefunctions import *
 class main(QtGui.QWidget):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)  # Starting the mainWindow
-        self.ui = newBlackJacUI.Ui_Blackjack()  # getting the UI framework the Blackjack UI and putting it into ui
+        self.ui = blackjackui.Ui_Blackjack()  # getting the UI framework the Blackjack UI and putting it into ui
         self.ui.setupUi(self)  # calling the function from Ui_Blackjack
 
         self.ui.btnBet.clicked.connect(self.betClicked)  # connecting the bet Button from the Ui_Blackjack class
