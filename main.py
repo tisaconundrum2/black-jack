@@ -21,7 +21,7 @@ class main(QtGui.QWidget):
 
         # sets up the initial game conditions
         self.money = 500
-        self.ui.betSpinBox.setMaximum(int(self.ui.labMoney.text()))
+        self.ui.betSpinBox.setMaximum(self.money)
         self.ui.labMoney.setText(str(self.money))
         self.hands = []
         self.bet = 0
@@ -29,7 +29,7 @@ class main(QtGui.QWidget):
         # list of card graphics in the ui
         self.dealer_hand = [self.ui.dCard_0, self.ui.dCard_1, self.ui.dCard_2, self.ui.dCard_3, self.ui.dCard_4,
                             self.ui.dCard_5, self.ui.dCard_6, self.ui.dCard_7, self.ui.dCard_8, self.ui.dCard_9]
-        self.player_hand = [self.ui.pCard_0, self.ui.dCard_1, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4,
+        self.player_hand = [self.ui.pCard_0, self.ui.pCard_1, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4,
                             self.ui.pCard_5, self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9]
 
         # disables all buttons that control the hand
