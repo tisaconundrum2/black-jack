@@ -1,9 +1,10 @@
 black-jack
 ==========
 
-Blackjack game that is currently complete and uses a UI created through QT designer.
+This is Blackjack created with PyQt4 as the backend framework.
+The UI was created using QT designer.
 
-To run the game requires PYQT4.  Download all files and cards folder into the same directory.
-Run main to begin.
+The game requires PyQt4 installed.  Download or clone all the files into a single directory. Click and run "main.py"
 
-Errors have been found in this version.  It is currently unsupported please use knowing this.
+![image](https://cloud.githubusercontent.com/assets/11879769/25784704/974cde3c-3326-11e7-8046-589d37781e05.png)
+
