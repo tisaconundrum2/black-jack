@@ -1,4 +1,4 @@
-black-jack
+Blackjack
 ==========
 
 This is Blackjack created with PyQt4 as the backend framework.
