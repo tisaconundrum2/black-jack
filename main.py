@@ -49,8 +49,6 @@ class main(QtGui.QWidget):
         except:
             self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
 
-        self.ui.betSpinBox.clear()
-
     def hitClicked(self):
         '''adds card to the ui showing the card that was just added to the hand'''
         self.ui.btnDouble.setEnabled(False)
