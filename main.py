@@ -7,45 +7,44 @@ from gamefunctions import *
 
 class main(QtGui.QWidget):
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)  # Starting the mainWindow
-        self.ui = blackjackui.Ui_Blackjack()  # getting the UI framework the Blackjack UI and putting it into ui
-        self.ui.setupUi(self)  # calling the function from Ui_Blackjack
+        QtGui.QMainWindow.__init__(self)                      # Starting the mainWindow
+        self.ui = blackjackui.Ui_Blackjack()                  # getting the UI framework the Blackjack UI and putting it into ui
+        self.ui.setupUi(self)                                 # calling the function from Ui_Blackjack
 
-        self.ui.btnBet.clicked.connect(self.betClicked)  # connecting the bet Button from the Ui_Blackjack class
-        self.ui.btnStay.clicked.connect(self.stayClicked)  # connecting stay button
-        self.ui.btnDouble.clicked.connect(self.doubleClicked)  # connecting double button
-        self.ui.btnHit.clicked.connect(self.hitClicked)  # connecting hit button
+        self.ui.btnBet.clicked.connect(self.betClicked)       # connecting the bet Button from the Ui_Blackjack class
+        self.ui.btnStay.clicked.connect(self.stayClicked)     # connecting stay button
+        self.ui.btnDouble.clicked.connect(self.doubleClicked) # connecting double button
+        self.ui.btnHit.clicked.connect(self.hitClicked)       # connecting hit button
 
         self.deck = deck()
-        self.shoe = create_shoe(self.deck, 1)  # creates a deck of cards to be used during the game
+        self.shoe = create_shoe(self.deck, 1)                 # creates a deck of cards to be used during the game
 
         # sets up the initial game conditions
-        self.money = 500
-        self.ui.betSpinBox.setMaximum(self.money)
-        self.ui.labMoney.setText(str(self.money))
-        self.hands = []
-        self.bet = 0
+        self.money = 500                                      # give the player 500 dollars
+        self.ui.betSpinBox.setMaximum(self.money)             # set the maximum spinbox value
+        self.ui.labMoney.setText(str(self.money))             # set the label for the amount of money available
+        self.hands = []                                       # clear the hands of both the dealer and player
+        self.bet = 0                                          # set the initial value for the bet
 
-        # list of card graphics in the ui
+        # make a list of card graphics in the UI
         self.dealer_hand = [self.ui.dCard_0, self.ui.dCard_1, self.ui.dCard_2, self.ui.dCard_3, self.ui.dCard_4,
                             self.ui.dCard_5, self.ui.dCard_6, self.ui.dCard_7, self.ui.dCard_8, self.ui.dCard_9]
         self.player_hand = [self.ui.pCard_0, self.ui.pCard_1, self.ui.pCard_2, self.ui.pCard_3, self.ui.pCard_4,
                             self.ui.pCard_5, self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9]
 
-        # disables all buttons that control the hand
-        buttoncontrol(self.ui)
+        buttoncontrol(self.ui)                                 # disables all buttons that control the hand
 
     def betClicked(self):
         try:
-            if self.money <= 0:
-                self.money = 500
+            if self.money <= 0:                                # if the user ran out of money
+                self.money = 500                               # give them some more
                 self.ui.labWarning.setText("Here's some more money to play with. Have fun.")
-                self.ui.labMoney.setText(str(self.money))
-                self.ui.betSpinBox.setMaximum(self.money)
-            elif int(self.ui.betSpinBox.text()) > self.money or int(self.ui.betSpinBox.text()) < 0:
+                self.ui.labMoney.setText(str(self.money))      # change the label of the amount of money that is available
+                self.ui.betSpinBox.setMaximum(self.money)      # set the maximum spinbox value
+            elif int(self.ui.betSpinBox.text()) > self.money or int(self.ui.betSpinBox.text()) < 0: # Alert the user when they go out of bounds
                 self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
             else:
-                betfunction(self)
+                betfunction(self)                              # Call the betfunction from UIfunctions
         except:
             self.ui.labWarning.setText("Please enter a number less than " + str(self.money) + " and greater than 0")
 
