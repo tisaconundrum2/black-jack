@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_Blackjack(object):
     def setupUi(self, Blackjack):
         Blackjack.setObjectName(_fromUtf8("Blackjack"))
-        Blackjack.resize(638, 288)
+        Blackjack.resize(1023, 288)
         self.horizontalLayout = QtGui.QHBoxLayout(Blackjack)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.playingSide = QtGui.QVBoxLayout()
@@ -216,6 +216,9 @@ class Ui_Blackjack(object):
         self.btnStay = QtGui.QPushButton(Blackjack)
         self.btnStay.setObjectName(_fromUtf8("btnStay"))
         self.bettingSide.addWidget(self.btnStay)
+        self.btnStay_2 = QtGui.QPushButton(Blackjack)
+        self.btnStay_2.setObjectName(_fromUtf8("btnStay_2"))
+        self.bettingSide.addWidget(self.btnStay_2)
         spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.bettingSide.addItem(spacerItem2)
         self.horizontalLayout.addLayout(self.bettingSide)
@@ -224,7 +227,7 @@ class Ui_Blackjack(object):
         QtCore.QMetaObject.connectSlotsByName(Blackjack)
 
     def retranslateUi(self, Blackjack):
-        Blackjack.setWindowTitle(_translate("Blackjack", "Blackjack", None))
+        Blackjack.setWindowTitle(_translate("Blackjack", "Form", None))
         self.dealerLabel.setText(_translate("Blackjack", "Dealer:", None))
         self.labDealer.setText(_translate("Blackjack", "0", None))
         self.playerLabel.setText(_translate("Blackjack", "Player:", None))
@@ -236,14 +239,5 @@ class Ui_Blackjack(object):
         self.btnDouble.setText(_translate("Blackjack", "Double", None))
         self.btnHit.setText(_translate("Blackjack", "Hit", None))
         self.btnStay.setText(_translate("Blackjack", "Stay", None))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    Blackjack = QtGui.QWidget()
-    ui = Ui_Blackjack()
-    ui.setupUi(Blackjack)
-    Blackjack.show()
-    sys.exit(app.exec_())
+        self.btnStay_2.setText(_translate("Blackjack", "Save game", None))
 

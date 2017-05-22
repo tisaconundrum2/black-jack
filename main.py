@@ -1,5 +1,5 @@
 import sys
-
+import dill
 import blackjackui
 from UIfunctions import *
 from gamefunctions import *
@@ -33,6 +33,9 @@ class main(QtGui.QWidget):
                             self.ui.pCard_5, self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9]
 
         buttoncontrol(self.ui)                                 # disables all buttons that control the hand
+        f = open('myfile.txt', 'w')
+        f.write(str(dill.dumps(self.ui)))
+        f.close()
 
     def betClicked(self):
         try:
