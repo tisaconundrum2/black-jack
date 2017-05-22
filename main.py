@@ -15,6 +15,8 @@ class main(QtGui.QWidget):
         self.ui.btnStay.clicked.connect(self.stayClicked)     # connecting stay button
         self.ui.btnDouble.clicked.connect(self.doubleClicked) # connecting double button
         self.ui.btnHit.clicked.connect(self.hitClicked)       # connecting hit button
+        self.ui.btnSave.clicked.connect(self.saveClicked)
+        self.ui.btnLoad.clicked.connect(self.loadClicked)
 
         self.deck = deck()
         self.shoe = create_shoe(self.deck, 1)                 # creates a deck of cards to be used during the game
@@ -33,8 +35,16 @@ class main(QtGui.QWidget):
                             self.ui.pCard_5, self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9]
 
         buttoncontrol(self.ui)                                 # disables all buttons that control the hand
-        f = open('myfile.txt', 'w')
-        f.write(str(dill.dumps(self.ui)))
+
+    def loadClicked(self):
+        f = open('savefile.txt', 'rb')
+        self.ui = dill.loads(f.read())
+        self.ui.setupUi(self)
+        f.close()
+
+    def saveClicked(self):
+        f = open('savefile.txt', 'wb')
+        f.write(dill.dumps(self.ui))
         f.close()
 
     def betClicked(self):
