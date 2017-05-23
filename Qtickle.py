@@ -54,6 +54,16 @@ class Qtickle(object):
                 value = obj.text()
                 self.settings.setValue(name, value)
 
+            if isinstance(obj, QComboBox):
+                values = []                                # the list that will hold all values from QCombobox
+                name = obj.objectName()                    # get the QCombobox object's name
+                for i in range(obj.count()):               # QCombobox contains a number of items
+                    values.append(obj.itemData(i))         # put those items into a list for saving
+                currValue = obj.currentText()              # get the current selected item's value
+                selected = obj.findText(currValue)         #
+                self.settings.setValue(name, currValue)    #
+                self.settings.setValue(name, selected)     #
+
     def guirestore(self):
 
         # Restore geometry  
@@ -114,3 +124,10 @@ class Qtickle(object):
                 value = self.settings.value(name)
                 if value != None:
                     obj.setText(value)
+
+            if isinstance(obj, QComboBox):
+                name = obj.objectName()
+                value = obj.currentText()
+                selected = obj.setCurrentIndex(obj.findText(value))
+                self.settings.setValue(name, value)
+                self.settings.setValue(name, selected)
