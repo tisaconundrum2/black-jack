@@ -12,6 +12,8 @@ class main(QtGui.QWidget):
         self.ui = blackjackui.Ui_Blackjack()  # getting the UI framework the Blackjack UI and putting it into ui
         self.ui.setupUi(self)  # calling the function from Ui_Blackjack
 
+        self.qtickle = Qtickle(self.ui, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
+
         self.ui.btnBet.clicked.connect(self.betClicked)  # connecting the bet Button from the Ui_Blackjack class
         self.ui.btnStay.clicked.connect(self.stayClicked)  # connecting stay button
         self.ui.btnDouble.clicked.connect(self.doubleClicked)  # connecting double button
@@ -36,11 +38,12 @@ class main(QtGui.QWidget):
                             self.ui.pCard_5, self.ui.pCard_6, self.ui.pCard_7, self.ui.pCard_8, self.ui.pCard_9]
 
         buttoncontrol(self.ui)  # disables all buttons that control the hand
-        self.qtickle = Qtickle(self.ui, QtCore.QSettings('saved.ini', QtCore.QSettings.IniFormat))
 
 
     def loadClicked(self):
         self.qtickle.guirestore()
+        self.money = int(self.ui.labMoney.text())
+        self.ui.betSpinBox.setMaximum(self.money)  # set the maximum spinbox value
 
     def saveClicked(self):
         self.qtickle.guisave()
