@@ -17,13 +17,6 @@ class Qtickle(object):
         # self.settings.setValue('pos', self.ui.pos())
 
         for name, obj in inspect.getmembers(self.ui):
-            # if type(obj) is QComboBox:  # this works similar to isinstance, but missed some field... not sure why?
-            if isinstance(obj, QComboBox):
-                name = obj.objectName()  # get combobox name
-                index = obj.currentIndex()  # get current index from combobox
-                text = obj.itemText(index)  # get the text for current index
-                self.settings.setValue(name, text)  # save combobox selection to registry
-
             if isinstance(obj, QLineEdit):
                 name = obj.objectName()
                 value = obj.text()
@@ -55,14 +48,14 @@ class Qtickle(object):
                 self.settings.setValue(name, value)
 
             if isinstance(obj, QComboBox):
-                values = []                                # the list that will hold all values from QCombobox
-                name = obj.objectName()                    # get the QCombobox object's name
-                for i in range(obj.count()):               # QCombobox contains a number of items
-                    values.append(obj.itemData(i))         # put those items into a list for saving
-                currValue = obj.currentText()              # get the current selected item's value
-                selected = obj.findText(currValue)         #
-                self.settings.setValue(name, currValue)    #
-                self.settings.setValue(name, selected)     #
+                values = []  # the list that will hold all values from QCombobox
+                name = obj.objectName()  # get the QCombobox object's name
+                for i in range(obj.count()):  # QCombobox contains a number of items
+                    itemData = obj.itemText(i)
+                    values.append(itemData)  # put those items into a list for saving
+                index = obj.findText(obj.currentText())  # return the index of the item, assign to selected
+                self.settings.setValue(name + "Values", values)  # save all the values in settings
+                self.settings.setValue(name + "Index", index)  # save the indexed value in settings
 
     def guirestore(self):
 
@@ -71,25 +64,6 @@ class Qtickle(object):
         # self.ui.move(self.settings.value('pos', QtCore.QPoint(60, 60)))
 
         for name, obj in inspect.getmembers(self.ui):
-            if isinstance(obj, QComboBox):
-                index = obj.currentIndex()  # get current region from combobox
-                # text   = obj.itemText(index)   # get the text for new selected index
-                name = obj.objectName()
-
-                value = (self.settings.value(name))
-
-                if value == "":
-                    continue
-
-                index = obj.findText(value)  # get the corresponding index for specified string in combobox
-
-                if index == -1:  # add to list if not found
-                    obj.insertItems(0, [value])
-                    index = obj.findText(value)
-                    obj.setCurrentIndex(index)
-                else:
-                    obj.setCurrentIndex(index)  # preselect a combobox value by index
-
             if isinstance(obj, QLineEdit):
                 name = obj.objectName()
                 value = (self.settings.value(name).decode('utf-8'))  # get stored value from registry
@@ -127,7 +101,17 @@ class Qtickle(object):
 
             if isinstance(obj, QComboBox):
                 name = obj.objectName()
-                value = obj.currentText()
-                selected = obj.setCurrentIndex(obj.findText(value))
-                self.settings.setValue(name, value)
-                self.settings.setValue(name, selected)
+                values = self.settings.value(name + "Values")  # values will be a list.
+                # clear all the objects
+                # so that we don't run into issues
+                # with restoring the list of values
+                obj.clear()
+                for i in range(len(values)):
+                    value = values[i]
+                    if not (value == '' or value == ""):
+                        # if there are some values in the list, we should add them to the Combobox
+                            obj.insertItem(i, value)
+
+                index = self.settings.value(
+                    name + "Index")  # next we want to select the item in question by getting it's index, pull the index from the .ini file
+                obj.setCurrentIndex(int(index))
